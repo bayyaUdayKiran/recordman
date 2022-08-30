@@ -6,14 +6,8 @@ import os
 
 MIN_PAY = 30
 
-class Dates:
-    def __init__ (self):
-        self.today = datetime.datetime.now().day
-        self.date = datetime.date.today()
-        
 
 if __name__ == "__main__":
-    dt = Dates()
     handler = fh.Handler()
 
     #Handle username input..
@@ -51,13 +45,13 @@ if __name__ == "__main__":
         advance = amount - due
         due_amount = -advance
 
-    handler.write(user, due_amount, dt.date, amount)
+    handler.write(user, due_amount, datetime.date.today(), amount)
     with open("../"+user+"/"+user+"due.txt", "w") as f:
         f.write(str(due_amount))
 
     with open("../"+user+"/"+user+"amount.txt", "r") as f:
         tot_amount = f.read()
-    filename = user+"/"+user+"log.txt"
+    filename = "../"+user+"/"+user+"log.txt"
     print(f"[+] To check your payment statement view, {os.path.abspath(filename)}")
     print(f"[+] Till now, you've paid ₹{tot_amount}")
     print(f"[+] You've to pay ₹{due_amount+MIN_PAY} tommorrow")
